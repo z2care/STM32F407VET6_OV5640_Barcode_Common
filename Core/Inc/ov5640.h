@@ -2,8 +2,8 @@
 #define _OV5640_H
 
 /*
- * SIOC: PB0
- * SIOD: PB1
+ * SIOC: PB8
+ * SIOD: PB9
  * VSYNC: PB7
  * HREF: PA4
  * PCLK: PA6
@@ -23,10 +23,10 @@
  */
 #include "stm32f4xx_hal.h"
 
-#define SCCB_SCL_L    		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET)
-#define SCCB_SCL_H    		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_SET)
-#define SCCB_SDA_L    		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_1,GPIO_PIN_RESET)
-#define SCCB_SDA_H    		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_1,GPIO_PIN_SET)
+#define SCCB_SCL_L    		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_8,GPIO_PIN_RESET)
+#define SCCB_SCL_H    		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_8,GPIO_PIN_SET)
+#define SCCB_SDA_L    		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_9,GPIO_PIN_RESET)
+#define SCCB_SDA_H    		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_9,GPIO_PIN_SET)
 
 #define SCCB_READ_SDA    	HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1)
 #define SCCB_ID_W   	    0X78  			//OV5640 ID for Write
@@ -59,11 +59,11 @@ void SCCB_SDA_OUT(void);
 
 void SCCB_Rst(void);
 
-//OV5640相关寄存器定义
-#define OV5640_CHIPIDH          0X300A  	//OV5640芯片ID高字节
-#define OV5640_CHIPIDL          0X300B  	//OV5640芯片ID低字节
+//OV5640相关寄存器定�?
+#define OV5640_CHIPIDH          0X300A  	//OV5640�?片ID高字�?
+#define OV5640_CHIPIDL          0X300B  	//OV5640�?片ID低字�?
 
-//OV5640相关寄存器定义
+//OV5640相关寄存器定�?
 #define OV5640_CHIPIDH          0X300A  	//OV5640 CHIP ID high byte
 #define OV5640_CHIPIDL          0X300B  	//OV5640 CHIP ID low byte
 

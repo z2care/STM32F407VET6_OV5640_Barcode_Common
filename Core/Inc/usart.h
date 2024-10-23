@@ -26,7 +26,7 @@ int fputc(int ch, FILE *f) ;
 #define RAW //RAW format
 
 #include "main.h"
-//OV2640 SXGA初始化寄存器序列表
+//OV2640 SXGA初�?�化寄存器序列表
 //SXGA(1600*1200)
 
 const uint8_t ov2640_sxga_init_reg_tbl[][2]=
@@ -412,7 +412,7 @@ const uint8_t ov2640_sxga_init_reg_tbl_raw[][2]=
 
 };
 
-//OV2640 SVGA初始化寄存器序列表
+//OV2640 SVGA初�?�化寄存器序列表
 //SVGA 800*600 up to 30 fps
 const uint8_t ov2640_svga_init_reg_tbl[][2]=
 {
@@ -661,7 +661,7 @@ const uint8_t ov2640_yuv422_reg_tbl[][2]=
 	{0xc2, 0xcc}
 };
 
-//自动曝光设置参数,支持5个等级
+//�?动曝光�?�置参数,�?�?5�?等级
 const static uint8_t OV2640_AUTOEXPOSURE_LEVEL[5][8]=
 {
     {
@@ -695,7 +695,7 @@ const static uint8_t OV2640_AUTOEXPOSURE_LEVEL[5][8]=
         0x26,0x92,
     },
 };
-//OV2640自动曝光等级设置
+//OV2640�?动曝光等级�?�置
 //level:0~4
 void OV2640_Auto_Exposure(uint8_t level)
 {
@@ -706,11 +706,11 @@ void OV2640_Auto_Exposure(uint8_t level)
         SCCB_WR_Reg(p[i*2],p[i*2+1]);
     }
 }
-//白平衡设置
-//0:自动
-//1:太阳sunny
+//白平衡�?�置
+//0:�?�?
+//1:�?阳sunny
 //2,阴天cloudy
-//3,办公室office
+//3,办公�?office
 //4,家里home
 void OV2640_Light_Mode(uint8_t mode)
 {
@@ -761,7 +761,7 @@ void OV2640_Color_Saturation(uint8_t sat)
     SCCB_WR_Reg(0X7D,reg7dval);
     SCCB_WR_Reg(0X7D,reg7dval);
 }
-//亮度设置
+//�?度�?�置
 //0:(0X00)-2
 //1:(0X10)-1
 //2,(0X20) 0
@@ -776,7 +776,7 @@ void OV2640_Brightness(uint8_t bright)
   SCCB_WR_Reg(0x7d, bright<<4);
   SCCB_WR_Reg(0x7d, 0x00);
 }
-//对比度设置
+//对比度�?�置
 //0:-2
 //1:-1
 //2,0
@@ -784,7 +784,7 @@ void OV2640_Brightness(uint8_t bright)
 //4,+2
 void OV2640_Contrast(uint8_t contrast)
 {
-    uint8_t reg7d0val=0X20;//默认为普通模式
+    uint8_t reg7d0val=0X20;//默�?�为�?通模�?
     uint8_t reg7d1val=0X20;
       switch(contrast)
     {
@@ -815,7 +815,7 @@ void OV2640_Contrast(uint8_t contrast)
     SCCB_WR_Reg(0x7d,0x06);
 }
 //特效设置
-//0:普通模式
+//0:�?通模�?
 //1,负片
 //2,黑白
 //3,偏红
@@ -824,7 +824,7 @@ void OV2640_Contrast(uint8_t contrast)
 //6,复古
 void OV2640_Special_Effects(uint8_t eft)
 {
-    uint8_t reg7d0val=0X00;//默认为普通模式
+    uint8_t reg7d0val=0X00;//默�?�为�?通模�?
     uint8_t reg7d1val=0X80;
     uint8_t reg7d2val=0X80;
     switch(eft)
@@ -865,7 +865,7 @@ void OV2640_Special_Effects(uint8_t eft)
 }
 //彩条测试
 //sw:0,关闭彩条
-//   1,开启彩条(注意OV2640的彩条是叠加在图像上面的)
+//   1,开�?彩条(注意OV2640的彩条是叠加在图像上面的)
 void OV2640_Color_Bar(uint8_t sw)
 {
     uint8_t reg;
@@ -876,8 +876,8 @@ void OV2640_Color_Bar(uint8_t sw)
     SCCB_WR_Reg(0X12,reg);
 }
 //设置图像输出窗口
-//sx,sy,起始地址
-//width,height:宽度(对应:horizontal)和高度(对应:vertical)
+//sx,sy,起�?�地址
+//width,height:宽度(对应:horizontal)和高�?(对应:vertical)
 void OV2640_Window_Set(uint16_t sx,uint16_t sy,uint16_t width,uint16_t height)
 {
     uint16_t endx;
@@ -887,23 +887,23 @@ void OV2640_Window_Set(uint16_t sx,uint16_t sy,uint16_t width,uint16_t height)
      endy=sy+height/2;
 
     SCCB_WR_Reg(0XFF,0X01);
-    temp=SCCB_RD_Reg(0X03);                //读取Vref之前的值
+    temp=SCCB_RD_Reg(0X03);                //读取Vref之前的�?
     temp&=0XF0;
     temp|=((endy&0X03)<<2)|(sy&0X03);
-    SCCB_WR_Reg(0X03,temp);                //设置Vref的start和end的最低2位
-    SCCB_WR_Reg(0X19,sy>>2);               //设置Vref的start的高8位
-    SCCB_WR_Reg(0X1A,endy>>2);             //设置Vref的end的高8位
+    SCCB_WR_Reg(0X03,temp);                //设置Vref的start和end的最�?2�?
+    SCCB_WR_Reg(0X19,sy>>2);               //设置Vref的start的高8�?
+    SCCB_WR_Reg(0X1A,endy>>2);             //设置Vref的end的高8�?
 
-    temp=SCCB_RD_Reg(0X32);                //读取Href之前的值
+    temp=SCCB_RD_Reg(0X32);                //读取Href之前的�?
     temp&=0XC0;
     temp|=((endx&0X07)<<3)|(sx&0X07);
-    SCCB_WR_Reg(0X32,temp);                //设置Href的start和end的最低3位
-    SCCB_WR_Reg(0X17,sx>>3);               //设置Href的start高8位
-    SCCB_WR_Reg(0X18,endx>>3);             //设置Href的end的高8位
+    SCCB_WR_Reg(0X32,temp);                //设置Href的start和end的最�?3�?
+    SCCB_WR_Reg(0X17,sx>>3);               //设置Href的start�?8�?
+    SCCB_WR_Reg(0X18,endx>>3);             //设置Href的end的高8�?
 }
 //设置图像输出大小
-//OV2640输出图像的大小(分辨率),完全由改函数确定
-//width,height:宽度(对应:horizontal)和高度(对应:vertical),width和height必须是4的倍数
+//OV2640输出图像的大�?(分辨�?),完全由改函数�?�?
+//width,height:宽度(对应:horizontal)和高�?(对应:vertical),width和height必须�?4的倍数
 //for RGB565/YUV OV2640_OutSize_Set(w,h) outputs 2*w bytes for per line, and total h lines.
 //返回:0,设置成功
 //     其他,设置失败
@@ -918,22 +918,22 @@ uint8_t OV2640_OutSize_Set(uint16_t width,uint16_t height)
     outh=height/4;
     SCCB_WR_Reg(0XFF,0X00);
     SCCB_WR_Reg(0XE0,0X04);
-    SCCB_WR_Reg(0X5A,outw&0XFF);        //设置OUTW的低八位
-    SCCB_WR_Reg(0X5B,outh&0XFF);        //设置OUTH的低八位
+    SCCB_WR_Reg(0X5A,outw&0XFF);        //设置OUTW的低�?�?
+    SCCB_WR_Reg(0X5B,outh&0XFF);        //设置OUTH的低�?�?
     temp=(outw>>8)&0X03;
     temp|=(outh>>6)&0X04;
-    SCCB_WR_Reg(0X5C,temp);                //设置OUTH/OUTW的高�?????????
+    SCCB_WR_Reg(0X5C,temp);                //设置OUTH/OUTW的高�??????????
     SCCB_WR_Reg(0XE0,0X00);
     return 0;
 }
-//设置图像开窗大小
-//由OV2640_ImageSize_Set确定传感器输出分辨率大小。
-//该函数则在这个范围上面进行开窗，用于OV2640_OutSize_Set的输出
-//注意:本函数的宽度和高度,必须大于等于OV2640_OutSize_Set函数的宽度和高度
-//     OV2640_OutSize_Set设置的宽度和高度,根据本函数设置的宽度和高,由DSP
-//     自动计算缩放比例,输出给外部设备
-//width,height:宽度(对应:horizontal)和高度(对应:vertical),width和height必须是4的倍数
-//返回值:0,设置成功
+//设置图像开窗大�?
+//由OV2640_ImageSize_Set�?定传感器输出分辨率大小�?
+//该函数则在这�?范围上面进�?�开窗，用于OV2640_OutSize_Set的输�?
+//注意:�?函数的�?�度和高�?,必须大于等于OV2640_OutSize_Set函数的�?�度和高�?
+//     OV2640_OutSize_Set设置的�?�度和高�?,根据�?函数设置的�?�度和高,由DSP
+//     �?动�?�算缩放比例,输出给�?�部设�??
+//width,height:宽度(对应:horizontal)和高�?(对应:vertical),width和height必须�?4的倍数
+//返回�?:0,设置成功
 //    其他,设置失败
 uint8_t OV2640_ImageWin_Set(uint16_t offx,uint16_t offy,uint16_t width,uint16_t height)
 {
@@ -946,31 +946,31 @@ uint8_t OV2640_ImageWin_Set(uint16_t offx,uint16_t offy,uint16_t width,uint16_t 
     vsize=height/4;
     SCCB_WR_Reg(0XFF,0X00);
     SCCB_WR_Reg(0XE0,0X04);
-    SCCB_WR_Reg(0X51,hsize&0XFF);        //设置H_SIZE的低八位
-    SCCB_WR_Reg(0X52,vsize&0XFF);        //设置V_SIZE的低八位
-    SCCB_WR_Reg(0X53,offx&0XFF);        //设置offx的低八位
-    SCCB_WR_Reg(0X54,offy&0XFF);        //设置offy的低八位
+    SCCB_WR_Reg(0X51,hsize&0XFF);        //设置H_SIZE的低�?�?
+    SCCB_WR_Reg(0X52,vsize&0XFF);        //设置V_SIZE的低�?�?
+    SCCB_WR_Reg(0X53,offx&0XFF);        //设置offx的低�?�?
+    SCCB_WR_Reg(0X54,offy&0XFF);        //设置offy的低�?�?
     temp=(vsize>>1)&0X80;
     temp|=(offy>>4)&0X70;
     temp|=(hsize>>5)&0X08;
     temp|=(offx>>8)&0X07;
-    SCCB_WR_Reg(0X55,temp);                //设置H_SIZE/V_SIZE/OFFX,OFFY的高位
-    SCCB_WR_Reg(0X57,(hsize>>2)&0X80);    //设置H_SIZE/V_SIZE/OFFX,OFFY的高位
+    SCCB_WR_Reg(0X55,temp);                //设置H_SIZE/V_SIZE/OFFX,OFFY的高�?
+    SCCB_WR_Reg(0X57,(hsize>>2)&0X80);    //设置H_SIZE/V_SIZE/OFFX,OFFY的高�?
     SCCB_WR_Reg(0XE0,0X00);
     return 0;
 }
-//该函数设置图像尺寸大小,也就是所选格式的输出分辨率
+//该函数�?�置图像尺�?�大�?,也就�?所选格式的输出分辨�?
 //UXGA:1600*1200,SVGA:800*600,CIF:352*288
-//width,height:图像宽度和图像高度
-//返回值:0,设置成功
+//width,height:图像宽度和图像高�?
+//返回�?:0,设置成功
 //    其他,设置失败
 uint8_t OV2640_ImageSize_Set(uint16_t width,uint16_t height)
 {
     uint8_t temp;
     SCCB_WR_Reg(0XFF,0X00);
     SCCB_WR_Reg(0XE0,0X04);
-    SCCB_WR_Reg(0XC0,(width)>>3&0XFF);        //设置HSIZE�?????????10:3�?????????
-    SCCB_WR_Reg(0XC1,(height)>>3&0XFF);        //设置VSIZE�?????????10:3�?????????
+    SCCB_WR_Reg(0XC0,(width)>>3&0XFF);        //设置HSIZE�??????????10:3�??????????
+    SCCB_WR_Reg(0XC1,(height)>>3&0XFF);        //设置VSIZE�??????????10:3�??????????
     temp=(width&0X07)<<3;
     temp|=height&0X07;
     temp|=(width>>4)&0X80;
@@ -1042,7 +1042,7 @@ void SPI2_ENDIAN_H(void) ;
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-uint8_t aRxBuffer;			//接收中断缓冲
+uint8_t aRxBuffer;			//接收�?�?缓冲
 uint8_t Uart1_RxBuff[99] = {0};		//Rx buffer，should be adjusted according to Rx max byte length per communication.
 uint8_t Uart2_RxBuff[99] = {0};		//Rx buffer，should be adjusted according to Rx max byte length per communication.
 HAL_StatusTypeDef uart1_status_rx;
@@ -1221,10 +1221,10 @@ int main(void)
      OV2640_Color_Bar(0);
      OV2640_Auto_Exposure(2);
      OV2640_Special_Effects(0);
-     OV2640_Light_Mode(0);    //自动模式
-     OV2640_Color_Saturation(2);//色彩饱和�?
-     OV2640_Brightness(2);    //亮度0
-     OV2640_Contrast(2);        //对比�?
+     OV2640_Light_Mode(0);    //�?动模�?
+     OV2640_Color_Saturation(2);//色彩饱和�??
+     OV2640_Brightness(2);    //�?�?0
+     OV2640_Contrast(2);        //对比�??
 
 	 HAL_Delay(500); //pay attention
 
@@ -2021,7 +2021,7 @@ void SPI2_ENDIAN_H(void) ;
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-uint8_t aRxBuffer;			//接收中断缓冲
+uint8_t aRxBuffer;			//接收�?�?缓冲
 uint8_t Uart1_RxBuff[99] = {0};		//Rx buffer，should be adjusted according to Rx max byte length per communication.
 uint8_t Uart2_RxBuff[99] = {0};		//Rx buffer，should be adjusted according to Rx max byte length per communication.
 HAL_StatusTypeDef uart1_status_rx;
@@ -2214,10 +2214,10 @@ int main(void)
      OV2640_Color_Bar(0);
      OV2640_Auto_Exposure(2);
      OV2640_Special_Effects(0);
-     OV2640_Light_Mode(0);    //自动模式
-     OV2640_Color_Saturation(2);//色彩饱和度
-     OV2640_Brightness(2);    //亮度0
-     OV2640_Contrast(2);        //对比度
+     OV2640_Light_Mode(0);    //�?动模�?
+     OV2640_Color_Saturation(2);//色彩饱和�?
+     OV2640_Brightness(2);    //�?�?0
+     OV2640_Contrast(2);        //对比�?
 
 	 HAL_Delay(500); //pay attention
 
@@ -2982,7 +2982,7 @@ void assert_failed(uint8_t *file, uint32_t line)
 
 
 
-#endif
+#endif//#ifdef RAW
 
 
-#endif
+#endif//#ifdef MAINBAKCUP
